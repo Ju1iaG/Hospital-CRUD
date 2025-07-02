@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Patient</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background: #f9f9f9;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 500px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+<h1>Добавить пациента</h1>
+<form th:action="@{/patients}" th:object="${patient}" method="post">
+    <label for="fioPatient">ФИО:</label>
+    <input type="text" id="fioPatient" th:field="*{fioPatient}" required/>
+    <div th:if="${#fields.hasErrors('fioPatient')}" th:errors="*{fioPatient}" class="text-danger"></div>
+
+    <label for="passportId">Паспортные данные:</label>
+    <input type="text" id="passportId" th:field="*{passportId}" required/>
+
+    <label for="policyNumber">Номер полиса:</label>
+    <input type="text" id="policyNumber" th:field="*{policyNumber}" required/>
+
+    <label for="dateOfBirth" class="form-label">Дата рождения:</label>
+    <input type="date" th:field="*{dateOfBirth}" class="form-control" id="dateOfBirth" />
+
+    <label for="residentialAddress" class="form-label">Адрес проживания:</label>
+    <input type="text" th:field="*{residentialAddress}" class="form-control" id="residentialAddress" />
+
+    <label>Палата:</label>
+    <select name="ward.numberWard" th:field="*{ward.numberWard}">
+            <option th:each="w : ${wards}" th:value="${w.numberWard}" th:text="${w.numberWard} + ' — ' + ${w.doctor.fioDoctor}"></option>
+        </select>
+
+    <button type="submit">Сохранить</button>
+</form>
+</body>
+</html>

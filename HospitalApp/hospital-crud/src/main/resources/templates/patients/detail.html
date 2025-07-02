@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Patient Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background: #f9f9f9;
+        }
+        h1 {
+            color: #333;
+        }
+        .details {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 500px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        p {
+            margin: 10px 0;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+<h1>Информация о пациенте</h1>
+
+<div class="details">
+    <p><strong>ФИО:</strong> <span th:text="${patient.fioPatient}"></span></p>
+    <p><strong>Паспортные данные:</strong> <span th:text="${patient.passportId}"></span></p>
+    <p><strong>Номер полиса:</strong> <span th:text="${patient.policyNumber}"></span></p>
+    <p><strong>Номер палаты:</strong> <span th:text="${patient.ward.numberWard}"></span></p>
+    <p><strong>Дата рождения:</strong> <span th:text="${patient.dateOfBirth}"></span></p>
+    <p><strong>Адрес проживания:</strong> <span th:text="${patient.residentialAddress}"></span></p>
+    <p><strong>Врач:</strong> <span th:text="${patient.ward.doctor.fioDoctor}"></span></p>
+</div>
+
+<a th:href="@{/patients}">← Вернуться к списку пациентов</a>
+<a href="/doctors" class="btn btn-primary mb-3">Перейти к врачам</a>
+<a href="/wards" class="btn btn-primary mb-3">Перейти к палатам</a>
+</body>
+</html>
